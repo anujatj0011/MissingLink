@@ -1,5 +1,7 @@
 # MissingLink — Transport Improvement Planner
 
+**[Open the live app](https://missinglink-planner.streamlit.app/)**
+
 ![MissingLink project thumbnail](assets/thumbnail.png)
 
 Find poor public transport transfers and investigate timetable changes using real Dublin NTA data.
@@ -95,7 +97,11 @@ docs/                  Dataset notes and presentation brief
 
 ## Hosting
 
-This is a Python Streamlit application. It needs a Python hosting service; GitHub Pages cannot run it directly. The incomplete experimental static-site port is deliberately not included in this repository. No public app deployment has been verified.
+The app is deployed on Streamlit Community Cloud and is available to anyone with the link:
+
+**[MissingLink Transport Improvement Planner](https://missinglink-planner.streamlit.app/)**
+
+Deployment uses `app.py` from the `main` branch with Python 3.12.
 
 ## Attribution
 
