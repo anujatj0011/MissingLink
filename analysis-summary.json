@@ -1,0 +1,10 @@
+{
+  "interchanges": 2935,
+  "connections": 70251,
+  "poor_connections": 1308,
+  "improvement_connections": 1295,
+  "improvement_locations": 591,
+  "active_stop_events": 568429,
+  "elapsed_seconds": 117.4,
+  "scope": "Included weekday timetable; morning 07:00\u201310:00 and evening 16:00\u201319:00; same-stop transfers; 2-minute boarding buffer."
+}

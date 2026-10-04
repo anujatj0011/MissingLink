@@ -1,0 +1,26 @@
+A small missed connection. A long wait.
+MissingLink is a transport improvement planner. Two services can use the same stop, yet their timetables fail to connect. A passenger arriving just after a departure can face a long wait. MissingLink finds these repeated problems and shows which timetable changes are worth investigating.
+
+Start with the whole picture.
+The overview uses real National Transport Authority timetable data for Dublin. It identifies 1,308 poor connection patterns across 595 locations. At 591 locations, at least one tested shift improves a connection. These are scheduled transfer opportunities, not passenger counts.
+
+Locate problems. Prioritise opportunities.
+The map shows where poor transfers occur. Five priority places highlight the strongest opportunities, with the current wait, a suggested departure shift, and the simulated wait. This gives a planner a clear starting point.
+
+Every result stays available.
+The full ranking keeps every affected location available, grouped by stop. Each row shows that place's strongest opportunity. Search and peak filters narrow the results, so a planner can compare places without inspecting connections one at a time.
+
+One location. Its connections together.
+Let's explore DCU Collins Avenue. Both poor connections at this stop appear together. We will investigate the evening transfer from route 220 to route 104. Its current median wait is 64 minutes. The proposed change delays connecting departures by three minutes.
+
+Compare against the current timetable.
+The optional simulator starts with the current timetable. At zero shift, the simulated median remains 64 minutes. The analysis includes a two minute boarding allowance, so a departure at the arrival time is not a usable connection.
+
+Test a small change. Check the consequences.
+With a three minute shift, the median wait becomes two minutes for this connection. All three scheduled arrivals improve. But the stop wide check exposes a tradeoff: across other incoming routes, 16 arrival opportunities worsen. This is a candidate to investigate, not an automatic recommendation to implement.
+
+Open the evidence when you need it.
+Show evidence reveals the actual timetable comparison. For the first arrival, at sixteen fourteen, the next usable departure changes from seventeen eighteen to sixteen seventeen. Waiting falls from 64 to three minutes. The other two waits become two minutes. The sample is small, and operational constraints and effects elsewhere still need validation.
+
+Find the missing link. Plan better transfers.
+MissingLink turns timetable data into a practical planning workflow: find the problem, compare opportunities, test a change, and check the evidence. The goal is to help transport teams investigate better connections, with the benefits and tradeoffs visible.
