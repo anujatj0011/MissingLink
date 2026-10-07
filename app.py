@@ -10,13 +10,22 @@ import streamlit as st
 from engine import match, clock
 
 st.set_page_config(page_title='MissingLink · Better transfers',page_icon='🔗',layout='wide',initial_sidebar_state='collapsed')
-st.markdown('''<style>.stApp{background:#f5f7fa}h1,h2,h3{color:#132c46}
-[data-testid="stMetric"]{background:white;padding:18px;border-radius:12px;border:1px solid #e0e6ee}
-.block-container{max-width:1200px;padding-top:2rem} [data-testid="stExpander"]{background:white;border-radius:12px} div.stButton>button{border-radius:9px} </style>''',unsafe_allow_html=True)
-st.title('MissingLink')
-st.markdown('### Transport Improvement Planner')
-st.markdown('Where are transfers failing — and which timetable changes are worth investigating?')
-st.caption('Dublin · NTA scheduled services · Morning and evening peaks · Two-minute boarding allowance')
+st.markdown('''<style>
+.stApp{background:linear-gradient(180deg,#f7fbfb 0%,#ffffff 36%)} .block-container{max-width:1240px;padding-top:1.5rem;padding-bottom:3rem}
+h1,h2,h3{color:#16324a;letter-spacing:-.025em}
+[data-testid="stMetric"]{background:#fff;padding:17px 18px;border-radius:16px;border:1px solid #e2eaed;box-shadow:0 5px 18px rgba(22,50,74,.045)}
+[data-testid="stMetricLabel"]{color:#6b7b87} [data-testid="stExpander"]{background:#fff;border-radius:14px}
+[data-testid="stDataFrame"]{border:1px solid #e2eaed;border-radius:14px;overflow:hidden} div.stButton>button{border-radius:11px}
+.hero{padding:1.8rem 2rem;border:1px solid #dfe9eb;border-radius:22px;background:linear-gradient(125deg,#eaf6f5 0%,#fff 62%,#f5f9fb 100%);box-shadow:0 10px 30px rgba(22,50,74,.055);margin-bottom:1rem}
+.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:#168b87;font-weight:800}
+.hero h1{font-size:3rem;line-height:1;margin:.35rem 0 .65rem}.hero p{font-size:1.08rem;color:#61717d;max-width:850px;line-height:1.6;margin:0}
+.case{padding:1.2rem 1.35rem;border-radius:16px;background:#f0f8f7;border:1px solid #d9ebe9;margin:.6rem 0 1rem}.case strong{color:#16324a}
+@media(max-width:900px){.hero{padding:1.3rem}.hero h1{font-size:2.2rem}.block-container{padding-left:1rem;padding-right:1rem}}
+</style>''',unsafe_allow_html=True)
+st.markdown('''<div class="hero"><div class="eyebrow">Dublin public transport · decision-support prototype</div>
+<h1>Missing<span style="color:#168b87">Link</span></h1>
+<p>Find where scheduled transfers repeatedly fail, see which places deserve attention, and test small timetable shifts before deeper operational analysis.</p></div>''',unsafe_allow_html=True)
+st.caption('NTA scheduled services · Representative weekday · Morning 07:00–10:00 & evening 16:00–19:00 · 2-minute boarding allowance')
 DATA = Path(__file__).parent/'data'
 
 @st.cache_data(show_spinner=False)
@@ -47,9 +56,9 @@ def opportunity_table(frame):
         'best_shift':'Shift · +min','best_median':'Simulated wait · min'}).round(1)
 
 c1,c2,c3 = st.columns(3)
-c1.metric('Locations affected',f'{poor.stop_id.nunique():,}')
-c2.metric('Poor connections',f'{len(poor):,}')
-c3.metric('Places with improvement potential',f'{summary["improvement_locations"]:,}')
+c1.metric('📍 Locations flagged',f'{poor.stop_id.nunique():,}')
+c2.metric('🔗 Poor transfer patterns',f'{len(poor):,}')
+c3.metric('↗ Improvement potential',f'{summary["improvement_locations"]:,} places')
 
 f1,f2 = st.columns([3,1])
 query = f1.text_input('Find a place or route',placeholder='Search all results…')
@@ -120,7 +129,8 @@ with all_results:
     st.download_button('Download full analysis · all connections',(DATA/'all-connections.csv.gz').read_bytes(),'missinglink-all-connections.csv.gz','application/gzip')
 
 st.divider()
-st.subheader('Explore a place')
+st.markdown('## Explore a place')
+st.caption('Move from network-level screening to the evidence behind one stop and connection.')
 labels = leaders.set_index('stop_id')
 stop_id = st.selectbox('Location',leaders.stop_id.tolist(),format_func=lambda key:f'{labels.loc[key,"location"]} · {int(labels.loc[key,"patterns"])} poor connections · {key}')
 place = filtered[filtered.stop_id==stop_id]
